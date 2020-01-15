@@ -4,6 +4,10 @@ const stringToArray = require('../utils/index')
 
 
 module.exports = {
+    async index(req, res){
+        const devs = await Dev.find()
+        return res.json(devs)
+    },
    async store(request, response) {
         const {github_username, techs, longitude, latitude} = request.body
         let dev = await Dev.findOne({github_username})

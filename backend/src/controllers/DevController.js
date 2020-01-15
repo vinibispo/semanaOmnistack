@@ -30,5 +30,18 @@ module.exports = {
     
         }
                 return response.json(dev)
+    },
+    async update(req, res){
+        const {id} = req.params
+        const {techs} = req.body
+        const techArray = stringToArray(techs)
+        const dev = await Dev.findByIdAndUpdate(id, {
+            techs: techArray
+        })
+        res.send(dev)
+    },
+    async destroy(req, res){
+        const {id} = req.params
+        const dev = await Dev.findByIdAndRemove(id)
     }
 }

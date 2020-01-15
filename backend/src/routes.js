@@ -5,4 +5,6 @@ const SearchController = require('./controllers/SearchController')
 route.get('/devs', DevController.index)
 route.post('/devs', DevController.store)
 route.get('/search', SearchController.index)
+route.get('/dev/:id', DevController.update)
+route.delete('/dev/:id', DevController.destroy)
 module.exports = route

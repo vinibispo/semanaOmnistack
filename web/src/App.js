@@ -6,6 +6,7 @@ import './App.css'
 import './Sidebar.css'
 import './Main.css'
 import api from './services/api'
+import DevItem from './components/DevItem';
 function App() {
   const [latitude, setLatitude] = useState('')
   const [github_username, setGithubUsername] = useState('')
@@ -74,17 +75,7 @@ function App() {
       <main>
         <ul>
           {devs.map(dev=>(
-            <li key={dev._id} className="dev-item">
-            <header>
-              <img src={dev.avatar_url} alt={dev.name}/>
-              <div className="user-info">
-                <strong>{dev.name}</strong>
-                <span>{dev.techs.join(', ')}</span>
-              </div>
-            </header>
-            <p>{dev.bio}</p>
-            <a href={`https://github.com/${dev.github_username}`} >Acessar perfil no Github</a>
-          </li>
+            <DevItem key={dev._id} dev={dev}></DevItem>
           ))}
         </ul>
       </main>

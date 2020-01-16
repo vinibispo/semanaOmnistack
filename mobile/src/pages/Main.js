@@ -7,6 +7,7 @@ import api from '../services/api'
 function Main({navigation}){
     const [devs, setDevs] = useState([])
     const [currentRegion, setCurrentRegion] = useState(null)
+    const [techs, setTechs] = useState('')
     useEffect(()=>{
         async function loadInitialPosition(){
            const {granted} = await requestPermissionsAsync()
@@ -29,7 +30,7 @@ function Main({navigation}){
             params:{
                 latitude,
                 longitude,
-                techs: 'ReactJS'
+                techs
             }
         })
         setDevs(response.data.devs)
@@ -65,7 +66,7 @@ function Main({navigation}){
             ))}
         </MapView>
         <View style={style.searchForm}>
-            <TextInput style={style.searchInput} placeholder={"Buscar devs por techs"} placeholderTextColor="#999" autoCapitalize="words" autoCorrect={false}/>
+            <TextInput style={style.searchInput} value={techs} onChangeText={text =>setTechs(text)} placeholder={"Buscar devs por techs"} placeholderTextColor="#999" autoCapitalize="words" autoCorrect={false}/>
         </View>
         </>
     )

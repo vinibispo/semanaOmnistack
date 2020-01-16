@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import MapView, {Marker, Callout} from 'react-native-maps'
 import {StyleSheet, Image, View, Text, TextInput, TouchableOpacity} from 'react-native'
 import {requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location'
+import {MaterialIcons} from '@expo/vector-icons'
 function Main({navigation}){
     const [currentRegion, setCurrentRegion] = useState(null)
     useEffect(()=>{
@@ -35,8 +36,8 @@ function Main({navigation}){
                         <Text style={style.devName}>Vinícius Bispo</Text>
                         <Text style={style.devBio}>I'm just a curious guy</Text>
                         <Text style={style.devTechs}>ReactJS, React Native, Node.js</Text>
-                        <TouchableOpacity style={style.loadButton}>
-                            
+                        <TouchableOpacity onPress={()=>{}} style={style.loadButton}>
+                            <MaterialIcons name="my-location" size={20} color="#fff"/>
                         </TouchableOpacity>
                     </View>
                 </Callout>
@@ -73,6 +74,39 @@ const style = StyleSheet.create({
     },
     devTechs:{
         marginTop: 5
+    },
+    searchForm:{
+        position: 'absolute',
+        top: 20,
+        left: 20,
+        right: 20,
+        zIndex: 5,
+        flexDirection: 'row',
+    },
+    searchInput:{
+        flex: 1,
+        height: 50,
+        backgroundColor: '#fff',
+        color: '#333',
+        borderRadius: 25,
+        paddingHorizontal: 20,
+        fontSize: 16,
+        shadowColor: '#000',
+        shadowOpacity: 0.2,
+        shadowOffset:{
+            width: 4,
+            height: 4
+        },
+        elevation: 2
+    },
+    loadButton:{
+        width: 50,
+        height: 50,
+        backgroundColor: '#8e4dff',
+        borderRadius: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 15,
     }
 })
 export default Main

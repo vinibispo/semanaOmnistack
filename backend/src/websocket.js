@@ -1,6 +1,6 @@
 const socketio = require('socket.io')
 const connections = []
-const parseStringAsArray = require('./utils/index')
+const parseStringAsArray = require('./utils/parseStringAsArray')
 exports.setupWebSocket = (server) => {
     const io = socketio(server)
     io.on('connection', socket => {
@@ -14,5 +14,10 @@ exports.setupWebSocket = (server) => {
             },
             techs: parseStringAsArray(techs)
         })
+    })
+}
+exports.findConnection = (coordinates, techs)=>{
+    return connections.filter((connection) =>{
+
     })
 }

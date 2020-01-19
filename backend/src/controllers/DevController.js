@@ -1,6 +1,6 @@
 const axios = require('axios')
 const Dev = require('../models/Dev')
-const stringToArray = require('../utils/index')
+const stringToArray = require('../utils/parseStringAsArray')
 
 
 module.exports = {
@@ -27,7 +27,7 @@ module.exports = {
                 techs: techArray,
                 location
             })
-    
+
         }
                 return response.json(dev)
     },

@@ -1,9 +1,10 @@
 const socketio = require('socket.io')
 const connections = []
+let io
 const parseStringAsArray = require('./utils/parseStringAsArray')
 const calculateDistance = require('./utils/calculateDistance')
 exports.setupWebSocket = (server) => {
-    const io = socketio(server)
+    io = socketio(server)
     io.on('connection', socket => {
         console.log(socket.id)
         const {latitude, longitude, techs} = socket.handshake.query
@@ -22,4 +23,9 @@ exports.findConnection = (coordinates, techs)=>{
         calculateDistance(coordinates, connection.coordinates) < 10
         && connection.techs.some(item => techs.includes())
     ))
+}
+exports.sendMessage = (to, message, data) =>{
+    to.forEach(connection => {
+        io.to(connection.id).emit(message, data)
+    })
 }

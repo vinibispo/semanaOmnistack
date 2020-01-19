@@ -4,6 +4,7 @@ import {StyleSheet, Image, View, Text, TextInput, TouchableOpacity} from 'react-
 import {requestPermissionsAsync, getCurrentPositionAsync} from 'expo-location'
 import {MaterialIcons} from '@expo/vector-icons'
 import api from '../services/api'
+import {connect, disconnect} from '../services/socket'
 function Main({navigation}){
     const [devs, setDevs] = useState([])
     const [currentRegion, setCurrentRegion] = useState(null)
@@ -24,6 +25,10 @@ function Main({navigation}){
            }
         }
     })
+    setupWebSocket = () =>{
+        const {latitude, longitude} = currentRegion
+        connect(latitude, longitude, techs)
+    }
     async function loadDevs(){
         const {latitude, longitude} = currentRegion
         const response = await api.get('/search', {
@@ -33,6 +38,7 @@ function Main({navigation}){
                 techs
             }
         })
+        setupWebSocket()
         setDevs(response.data.devs)
     }
     function handleRegionChanged(region){

@@ -1,5 +1,5 @@
 const Dev = require('../models/Dev')
-const techArray = require('../utils/index')
+const techArray = require('../utils/parseStringAsArray')
 module.exports = {
     async index(req, res){
         const {latitude, longitude, techs} = req.query
